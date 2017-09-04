@@ -87,8 +87,8 @@ func FlattenPrefixedToResult(value interface{}, prefix string, m map[string]inte
 			FlattenPrefixedToResult(childValue.Interface(), base+childKey, m)
 		}
 	default:
-		if prefix != "" {
-			m[prefix] = value
+		if snake(prefix) != "" {
+			m[snake(prefix)] = value
 		}
 	}
 }
