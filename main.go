@@ -60,7 +60,7 @@ func FlattenPrefixed(value interface{}, prefix string) map[string]interface{} {
 func FlattenPrefixedToResult(value interface{}, prefix string, m map[string]interface{}) {
 	base := ""
 	if prefix != "" {
-		base = snake(prefix)+"_"
+		base = snake(prefix) + "_"
 	}
 
 	original := reflect.ValueOf(value)
@@ -69,7 +69,10 @@ func FlattenPrefixedToResult(value interface{}, prefix string, m map[string]inte
 		original = reflect.Indirect(original)
 		kind = original.Kind()
 	}
-	t := original.Type()
+	var t reflect.Type
+	if kind != reflect.Invalid {
+		t = original.Type()
+	}
 
 	switch kind {
 	case reflect.Map:
